@@ -1,0 +1,234 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Documentation",
+    "description": "This is an API User",
+    "version": "1.0.0",
+    "contact": {
+      "email": "lucas54neves@gmail.com"
+    }
+  },
+  "paths": {
+    "/users": {
+      "post": {
+        "tags": ["User"],
+        "sumary": "Create a User",
+        "description": "Create a new User",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "name": "User name sample",
+                "email": "User email sample"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "User already exists"
+          }
+        }
+      },
+      "get": {
+        "tags": ["User"],
+        "sumary": "List all users",
+        "description": "List all users",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "admin": {
+                        "type": "boolean"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "created_at": {
+                        "type": "string"
+                      },
+                      "updated_at": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "description": "User ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "75442486-0878-440c-9db1-a7006c25a39f",
+            "style": "simple"
+          }
+        ]
+      }
+    },
+    "/users/{user_id}": {
+      "get": {
+        "tags": ["User"],
+        "sumary": "Show user profile",
+        "description": "Show user profile",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "admin": {
+                      "type": "boolean"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "type": "string"
+                    },
+                    "updated_at": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "id": "75442486-0878-440c-9db1-a7006c25a39f",
+                  "name": "João",
+                  "admin": true,
+                  "email": "joao@mail.com",
+                  "created_at": "1995-12-17T03:24:00",
+                  "updated_at": "1995-12-17T03:24:00"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User does not exist"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "user_id",
+          "in": "path",
+          "description": "User ID",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "example": "75442486-0878-440c-9db1-a7006c25a39f",
+          "style": "simple"
+        }
+      ]
+    },
+    "/users/{user_id}/admin": {
+      "patch": {
+        "tags": ["User"],
+        "sumary": "Turn user admin",
+        "description": "Turn user admin",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "admin": {
+                        "type": "boolean"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "created_at": {
+                        "type": "string"
+                      },
+                      "updated_at": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "id": "75442486-0878-440c-9db1-a7006c25a39f",
+                  "name": "João",
+                  "admin": true,
+                  "email": "joao@mail.com",
+                  "created_at": "1995-12-17T03:24:00",
+                  "updated_at": "1995-12-17T03:24:00"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "This user does not exist"
+          },
+          "400": {
+            "description": "This user is already admin"
+          }
+        },
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "User ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "75442486-0878-440c-9db1-a7006c25a39f",
+            "style": "simple"
+          }
+        ]
+      }
+    }
+  }
+}
